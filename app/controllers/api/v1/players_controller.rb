@@ -5,22 +5,18 @@ class Api::V1::PlayersController < ApplicationController
     render json: @players
   end
 
-  # def create
-  #   player = Player.new(player_params)
-  #   player = Player.find(player_params[:player_id])
-  #   if player.save
-  #     serialized_data = ActiveModelSerializers::Adapter::Json.new(
-  #       PlayerSerializer.new(player)
-  #     ).serializable_hash
-  #     PlayersChannel.broadcast_to player, serialized_data
-  #     head :ok
-  #   end
-  # end
+  def create
+
+  end
 
   def update
     @player.update(player_params)
-    Character.create(player_id:@player.id)
+    Character.create(player_id:@player.id, hp: 10)
+    game= @player.game
+
     if @player.save
+      serialized_data = ActiveModelSerializers::Adapter::Json.new(PlayerSerializer.new(@player)).serializable_hash
+      PlayersChannel.broadcast_to game, serialized_data
       render json: @player, status: :accepted
     else
       render json: { errors: @player.errors.full_messages }, status: :unprocessible_entity
