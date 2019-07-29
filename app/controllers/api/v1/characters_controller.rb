@@ -1,26 +1,36 @@
 class Api::V1::CharactersController < ApplicationController
-  before_action :find_charater, only: [:update]
+  before_action :find_character, only: [:update]
   def index
-    @charaters = Character.all
-    render json: @charaters
+    @characters = Character.all
+    render json: @characters
+  end
+
+  def create
+    byebug
   end
 
   def update
-    @charater.update(charater_params)
-    if @charater.save
-      render json: @charater, status: :accepted
+    @character.update(character_params)
+    @player = Player.find(params['player_id'])
+    @game = Game.find(@player.game_id)
+    if @character.save
+      serialized_data = ActiveModelSerializers::Adapter::Json.new(CharacterSerializer.new(@character)).serializable_hash
+      serialized_data[:player]={}
+      serialized_data[:player]['amiaplayer'] = "characterUpdate"
+      PlayersChannel.broadcast_to @game, serialized_data
+      render json: @character, status: :accepted
     else
-      render json: { errors: @charater.errors.full_messages }, status: :unprocessible_entity
+      render json: { errors: @character.errors.full_messages }, status: :unprocessible_entity
     end
   end
 
   private
 
-  def charater_params
-    params.permit(:player_id, :hp, :ability, :alliance)
+  def character_params
+    params.permit(:player_id, :hp, :ability, :alliance, :location, :name, :win_condition)
   end
 
-  def find_charater
-    @charater = Character.find(params[:id])
+  def find_character
+    @character = Character.find(params[:id])
   end
 end

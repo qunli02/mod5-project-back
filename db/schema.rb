@@ -16,15 +16,19 @@ ActiveRecord::Schema.define(version: 2019_07_16_180601) do
   enable_extension "plpgsql"
 
   create_table "characters", force: :cascade do |t|
+    t.text "name"
+    t.text "win_condition"
     t.integer "player_id"
     t.integer "hp"
     t.text "ability"
     t.text "alliance"
+    t.integer "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "games", force: :cascade do |t|
+    t.integer "turn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
