@@ -6,6 +6,6 @@ class PlayersChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+    raise "stop"
   end
 end
