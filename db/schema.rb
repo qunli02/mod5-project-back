@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2019_07_16_180601) do
     t.text "win_condition"
     t.integer "player_id"
     t.integer "hp"
+    t.integer "damage", default: 0
     t.text "ability"
     t.text "alliance"
     t.integer "location"
@@ -29,6 +30,8 @@ ActiveRecord::Schema.define(version: 2019_07_16_180601) do
 
   create_table "games", force: :cascade do |t|
     t.integer "turn"
+    t.integer "wight"
+    t.text "field"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

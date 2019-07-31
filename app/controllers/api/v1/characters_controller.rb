@@ -13,6 +13,18 @@ class Api::V1::CharactersController < ApplicationController
     @character.update(character_params)
     @player = Player.find(params['player_id'])
     @game = Game.find(@player.game_id)
+
+    if params["damage"] === 7
+      damage = @character.hp - 7
+      @character.update(damage:damage)
+    elsif params["damage"] === "allie"
+      @character.update(damage:0)
+    elsif !!params["damage"]
+      @character.update(damage:@character.damage + params["damage"])
+    end
+    if @character.damage < 0
+      @character.update(damage: 0)
+    end
     if @character.save
       serialized_data = ActiveModelSerializers::Adapter::Json.new(CharacterSerializer.new(@character)).serializable_hash
       serialized_data[:player]={}
