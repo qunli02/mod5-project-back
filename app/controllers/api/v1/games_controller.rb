@@ -6,6 +6,7 @@ class Api::V1::GamesController < ApplicationController
   end
 
   def create
+    colors = ["red", "blue", "green", "yellow", "oragne", "teal", "purple", "black"]
     # game = Game.new(game_params)
     # if game.save
     #   serialized_data = ActiveModelSerializers::Adapter::Json.new(
@@ -15,7 +16,9 @@ class Api::V1::GamesController < ApplicationController
     #   head :ok
     # end
     @game = Game.create()
-    8.times{Player.create(name:"none", game_id:@game.id)}
+    colors.each do |color|
+      Player.create(name:"none", game_id:@game.id, color: color)
+    end
     @players = @game.players
     render json: @players
   end
