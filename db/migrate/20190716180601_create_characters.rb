@@ -9,6 +9,7 @@ class CreateCharacters < ActiveRecord::Migration[5.2]
       t.text :ability
       t.text :alliance
       t.integer :location
+      t.text :hermit, default: nil
 
 
       t.timestamps

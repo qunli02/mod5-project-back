@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2019_07_16_180601) do
     t.text "ability"
     t.text "alliance"
     t.integer "location"
+    t.text "hermit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_07_16_180601) do
   create_table "players", force: :cascade do |t|
     t.integer "game_id"
     t.text "name"
+    t.text "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

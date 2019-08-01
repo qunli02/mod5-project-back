@@ -15,7 +15,7 @@ class Api::V1::CharactersController < ApplicationController
     @game = Game.find(@player.game_id)
 
     if params["damage"] === 7
-      damage = @character.hp - 7
+      damage = 7
       @character.update(damage:damage)
     elsif params["damage"] === "allie"
       @character.update(damage:0)
@@ -39,7 +39,7 @@ class Api::V1::CharactersController < ApplicationController
   private
 
   def character_params
-    params.permit(:player_id, :hp, :ability, :alliance, :location, :name, :win_condition)
+    params.permit(:player_id, :hp, :ability, :alliance, :location, :name, :win_condition, :hermit)
   end
 
   def find_character
