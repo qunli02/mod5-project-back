@@ -50,7 +50,7 @@ class Api::V1::GamesController < ApplicationController
             win_condition:"All Hunter characters are dead OR 3 Neutral characters are dead",
             ability: "At the start of your turn. You can give 3 points of damage to one character who is at the underworld Gate."
           }
-          # ,
+          ,
           # {
           #   name:"Werewolf",
           #   alliance: "shadow",
@@ -58,13 +58,14 @@ class Api::V1::GamesController < ApplicationController
           #   win_condition:"All Hunter characters are dead OR 3 Neutral characters are dead",
           #   ability: "After you are attacked. You can attack that character immediately."
           # },
-          # {
-          #   name:"Valkyrie",
-          #   alliance: "shadow",
-          #   hp: 13,
-          #   win_condition:"All Hunter characters are dead OR 3 Neutral characters are dead",
-          #   ability: "When you attack. Your damage range is 1-4."
-          # },
+          {
+            name:"Valkyrie",
+            alliance: "shadow",
+            hp: 13,
+            win_condition:"All Hunter characters are dead OR 3 Neutral characters are dead",
+            ability: "When you attack. Your damage range is 1-4."
+          }
+          #,
           # {
           #   name:"Unknown",
           #   alliance: "shadow",
